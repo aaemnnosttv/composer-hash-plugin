@@ -1,0 +1,26 @@
+{
+    "name": "aaemnnosttv/composer-hash-plugin",
+    "description": "Composer plugin for writing the current composer version hash to a file on install/update.",
+    "type": "composer-plugin",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Evan Mattson",
+            "email": "me@aaemnnost.tv"
+        }
+    ],
+    "autoload": {
+        "classmap": [
+            "src/Plugin.php"
+        ]
+    },
+    "require": {
+        "composer-plugin-api": "^1.1"
+    },
+    "require-dev": {
+        "composer/composer": "^1.9"
+    },
+    "extra": {
+        "class": "ComposerHashPlugin\\Plugin"
+    }
+}
