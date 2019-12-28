@@ -11,7 +11,10 @@
     ],
     "autoload": {
         "classmap": [
-            "src/Plugin.php"
+            "src/"
+        ],
+        "files": [
+            "src/functions.php"
         ]
     },
     "require": {
