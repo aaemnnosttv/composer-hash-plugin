@@ -20,16 +20,6 @@ class Plugin implements PluginInterface, EventSubscriberInterface
     protected $io;
 
     /**
-     * The default file name to write the hash to.
-     */
-    const DEFAULT_FILE = 'composer.hash';
-
-    /**
-     * The key used in the project's extra configuration to override the default file.
-     */
-    const CONFIG_KEY = 'hash-file';
-
-    /**
      * Apply plugin modifications to Composer
      *
      * @param Composer    $composer
@@ -60,19 +50,12 @@ class Plugin implements PluginInterface, EventSubscriberInterface
     public function writeHash()
     {
         $lock = $this->composer->getLocker()->getLockData();
-        $dir = dirname($this->composer->getConfig()->getConfigSource()->getName());
-        $extra = $this->composer->getPackage()->getExtra();
-        $filename = ! empty($extra[self::CONFIG_KEY]) ? $extra[self::CONFIG_KEY] : self::DEFAULT_FILE;
-        $filepath = "$dir/$filename";
-
-        if (! is_dir(dirname($filepath))) {
-            mkdir(dirname($filepath), 0755, true);
-        }
+        $filepath = dirname($this->composer->getConfig()->getConfigSource()->getName()) . '/composer.hash';
 
         if (file_put_contents($filepath, $lock['content-hash'])) {
-            $this->io->write("<info>Wrote $filename</info>");
+            $this->io->write('<info>Wrote composer.hash</info>');
         } else {
-            $this->io->writeError("Failed to write $filename");
+            $this->io->writeError('Failed to write composer.hash');
         }
     }
 }
