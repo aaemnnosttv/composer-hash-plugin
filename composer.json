@@ -21,6 +21,6 @@
         "composer/composer": "^1.9"
     },
     "extra": {
-        "class": "ComposerHashPlugin\\Plugin"
+        "class": "ComposerHash\\Plugin"
     }
 }

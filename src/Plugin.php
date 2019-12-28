@@ -1,6 +1,6 @@
 <?php
 
-namespace ComposerHashPlugin;
+namespace ComposerHash;
 
 use Composer\Composer;
 use Composer\EventDispatcher\EventSubscriberInterface;
