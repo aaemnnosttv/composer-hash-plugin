@@ -5,9 +5,10 @@ namespace ComposerHash;
 use Composer\Composer;
 use Composer\EventDispatcher\EventSubscriberInterface;
 use Composer\IO\IOInterface;
+use Composer\Plugin\Capable;
 use Composer\Plugin\PluginInterface;
 
-class Plugin implements PluginInterface, EventSubscriberInterface
+class Plugin implements PluginInterface, EventSubscriberInterface, Capable
 {
     /**
      * @var Composer
@@ -57,5 +58,15 @@ class Plugin implements PluginInterface, EventSubscriberInterface
         } else {
             $this->io->writeError('Failed to write composer.hash');
         }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getCapabilities()
+    {
+        return array(
+            'Composer\Plugin\Capability\CommandProvider' => CommandProvider::class,
+        );
     }
 }
