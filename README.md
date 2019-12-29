@@ -1,5 +1,7 @@
 # Composer Hash Plugin
 
+[![Build Status](https://travis-ci.com/aaemnnosttv/composer-hash-plugin.svg?branch=master)](https://travis-ci.com/aaemnnosttv/composer-hash-plugin)
+
 A Composer plugin for writing the Composer hash to a file on install/update to verify parity with VCS.
 
 ## Overview
@@ -12,10 +14,22 @@ This is the only thing it will do automatically.
 This new file is intended to be excluded from version control.
 The hashes can then be verified, but that has to be done (semi) manually. 
 
-#### Verifying the Hash
+## API
 
-The plugin exposes a single `ComposerHash\verify($path)` function where `$path` is the absolute path to the project root directory containing `composer.json`.
-This function's only job is to check that the `composer.hash` matches that from the `composer.lock` file (if it doesn't, a `HashMismatchException` is thrown.
+Since the hash file is written automatically, the API exposes methods for verifying the hashes.
+
+### CLI
+
+```sh
+$ composer hash-verify
+```
+
+If hash verification fails, the command provides additional feedback and exits with a non-zero exit code.
+
+### PHP
+
+The plugin exposes a single `ComposerHash\verify($path)` function where `$path` is the absolute path to the project's root directory containing `composer.json`.
+This function checks that the `composer.hash` matches the corresponding hash in the `composer.lock` file (if it doesn't, a `HashMismatchException` is thrown.
 Other exceptions are thrown if called with an invalid path or if composer files are unreadable.
  
 ## Installation
