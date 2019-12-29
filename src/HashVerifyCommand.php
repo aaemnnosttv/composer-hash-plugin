@@ -22,6 +22,7 @@ class HashVerifyCommand extends BaseCommand
             $output->writeln("<info>Hashes match.</info>");
         } catch (\Exception $exception) {
             $output->writeln('<warning>' . $exception->getMessage() . '</warning>');
+            exit(1);
         }
     }
 }
