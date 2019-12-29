@@ -16,13 +16,13 @@ composer require aaemnnosttv/composer-hash-plugin:dev-master
 # Store the hash for comparison later.
 HASH_1=$(<composer.hash)
 # Test hashes match.
-php "$TRAVIS_BUILD_DIR/.travis/verify.php"
+composer hash-verify
 # Install Composer (should already be cached) to change the hash.
 composer require composer/composer:\^1
 # Store the hash for comparison.
 HASH_2=$(<composer.hash)
 # Test hashes match.
-php "$TRAVIS_BUILD_DIR/.travis/verify.php"
+composer hash-verify
 # Ensure hashes changed between installs.
 if [ "$HASH_1" == "$HASH_2" ]; then
     echo "Hash file did not update between installs!"
