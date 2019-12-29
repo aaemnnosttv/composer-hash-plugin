@@ -54,9 +54,9 @@ class Plugin implements PluginInterface, EventSubscriberInterface, Capable
         $filepath = dirname($this->composer->getConfig()->getConfigSource()->getName()) . '/composer.hash';
 
         if (file_put_contents($filepath, $lock['content-hash'])) {
-            $this->io->write('<info>Wrote composer.hash</info>');
+            $this->io->write('<info>Writing hash file</info>');
         } else {
-            $this->io->writeError('Failed to write composer.hash');
+            $this->io->writeError('Failed to write hash file');
         }
     }
 
