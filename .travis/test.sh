@@ -8,7 +8,6 @@ cd test-project
 
 composer init -q
 composer config repos.hash-plugin path "$TRAVIS_BUILD_DIR"
-composer config repos.packagist false
 # Note that hash file does not exist yet.
 [ ! -f composer.hash ] || exit 1
 composer show -a aaemnnosttv/composer-hash-plugin
