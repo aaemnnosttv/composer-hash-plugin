@@ -19,7 +19,8 @@
     },
     "require": {
         "composer-plugin-api": "^1.1",
-        "ext-json": "*"
+        "ext-json": "*",
+        "php": "^7"
     },
     "require-dev": {
         "composer/composer": "^1.9"
