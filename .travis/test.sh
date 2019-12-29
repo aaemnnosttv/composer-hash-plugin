@@ -11,6 +11,7 @@ composer config repos.hash-plugin path "$TRAVIS_BUILD_DIR"
 composer config repos.packagist false
 # Note that hash file does not exist yet.
 [ ! -f composer.hash ] || exit 1
+composer show -a -vvv
 composer require aaemnnosttv/composer-hash-plugin:dev-master
 # Hash file should exist now.
 [ -f composer.hash ] || exit 2
