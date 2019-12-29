@@ -1,0 +1,11 @@
+language: php
+
+php:
+  - 7.4
+  - 7.2
+
+install: composer install
+
+before_script: composer validate --strict
+
+script: .travis/test.sh
