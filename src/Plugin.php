@@ -69,4 +69,18 @@ class Plugin implements PluginInterface, EventSubscriberInterface, Capable
             'Composer\Plugin\Capability\CommandProvider' => CommandProvider::class,
         );
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function deactivate(Composer $composer, IOInterface $io)
+    {
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function uninstall(Composer $composer, IOInterface $io)
+    {
+    }
 }
