@@ -6,7 +6,7 @@ cd /tmp
 mkdir test-project
 cd test-project
 
-composer init -q
+composer init -q --name test/test
 composer config repos.hash-plugin path "$TRAVIS_BUILD_DIR"
 # Note that hash file does not exist yet.
 [ ! -f composer.hash ] || exit 1
