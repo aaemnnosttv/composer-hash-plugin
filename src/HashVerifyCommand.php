@@ -16,9 +16,8 @@ class HashVerifyCommand extends BaseCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        require_once __DIR__ . '/functions.php';
         try {
-            verify(dirname($this->getComposer()->getConfig()->getConfigSource()->getName()));
+            Hash::verify(dirname($this->getComposer()->getConfig()->getConfigSource()->getName()));
             $output->writeln("<info>Hashes match.</info>");
         } catch (\Exception $exception) {
             $output->writeln('<warning>' . $exception->getMessage() . '</warning>');
