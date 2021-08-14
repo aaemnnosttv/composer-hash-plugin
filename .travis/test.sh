@@ -19,7 +19,7 @@ HASH_1=$(<composer.hash)
 # Test hashes match.
 composer hash-verify
 # Install Composer (should already be cached) to change the hash.
-composer require composer/composer:\^1
+composer require composer/composer:\^2
 # Store the hash for comparison.
 HASH_2=$(<composer.hash)
 # Test hashes match.
