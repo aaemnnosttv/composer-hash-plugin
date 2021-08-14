@@ -39,10 +39,10 @@ class Plugin implements PluginInterface, EventSubscriberInterface, Capable
      */
     public static function getSubscribedEvents()
     {
-        return [
+        return array(
             'post-install-cmd' => 'writeHash',
             'post-update-cmd' => 'writeHash',
-        ];
+        );
     }
 
     /**
