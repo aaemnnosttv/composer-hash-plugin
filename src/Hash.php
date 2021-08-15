@@ -18,23 +18,34 @@ class Hash
      */
     public static function verify($composer_root_dir) {
         $dir = rtrim($composer_root_dir, '/');
-        $composer_lock_path = "$dir/composer.lock";
-        $composer_hash_path = "$dir/composer.hash";
 
         if (! file_exists("$dir/composer.json")) {
             throw new InvalidArgumentException("Invalid Composer project root directory at $composer_root_dir");
         }
 
-        if (! is_readable($composer_lock_path) || ! is_readable($composer_hash_path)) {
-            throw new RuntimeException("Required Composer files are unreadable.");
-        }
-
-        $generated_hash = trim(file_get_contents($composer_hash_path));
-        $composer_lock = json_decode(file_get_contents($composer_lock_path), true);
-        $composer_lock_hash = isset($composer_lock['content-hash']) ? $composer_lock['content-hash'] : '';
+        $generated_hash = self::json_get("$dir/composer.hash", 'hash');
+        $composer_lock_hash = self::json_get("$dir/composer.lock", 'content-hash');
 
         if ($generated_hash !== $composer_lock_hash) {
             throw new HashMismatchException('Composer hash mismatch. Please run "composer install".');
         }
+    }
+
+    private static function json_get($file_path, $key) {
+        if (! is_readable($file_path)) {
+            throw new RuntimeException("Required Composer file is unreadable: $file_path");
+        }
+
+        $decoded = json_decode(file_get_contents($file_path), true);
+
+        if ($decoded === null) {
+            throw new RuntimeException("Failed to decode JSON in $file_path");
+        }
+
+        if (! array_key_exists($key, $decoded)) {
+            return null;
+        }
+
+        return $decoded[$key];
     }
 }
