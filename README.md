@@ -1,6 +1,6 @@
 # Composer Hash Plugin
 
-[![Build Status](https://travis-ci.com/aaemnnosttv/composer-hash-plugin.svg?branch=master)](https://travis-ci.com/aaemnnosttv/composer-hash-plugin)
+[![Tests](https://github.com/aaemnnosttv/composer-hash-plugin/actions/workflows/test.yml/badge.svg)](https://github.com/aaemnnosttv/composer-hash-plugin/actions/workflows/test.yml)
 
 A Composer plugin for writing the Composer hash to a file on install/update to verify parity with VCS.
 
