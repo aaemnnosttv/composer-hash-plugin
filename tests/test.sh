@@ -4,7 +4,7 @@ set -ex
 
 REPO_ROOT_DIR=${1-$PWD)}
 
-[ ! -d "$REPO_ROOT_DIR/.git" ] || exit 1
+[ -d "$REPO_ROOT_DIR/.git" ] || exit 1
 
 cd /tmp
 mkdir test-project
