@@ -1,0 +1,35 @@
+name: Tests
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+    paths:
+      - .github/workflows/test.yml
+      - src/**
+      - composer.*
+
+jobs:
+  test-script:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php:
+          - 8.0
+          - 7.4
+          - 5.6
+
+    name: PHP ${{ matrix.php }}
+    steps:
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          tools: composer
+      - uses: actions/checkout@v2
+      - run: composer validate --strict
+      - name: Run test script
+        run: tests/test.sh $GITHUB_WORKSPACE

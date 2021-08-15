@@ -2,16 +2,20 @@
 
 set -ex
 
+REPO_ROOT_DIR=${1-$PWD)}
+
+[ ! -d "$REPO_ROOT_DIR/.git" ] || exit 1
+
 cd /tmp
 mkdir test-project
 cd test-project
 
 composer init -q --name test/test
-composer config repos.hash-plugin path "$TRAVIS_BUILD_DIR"
+composer config repos.hash-plugin path "$REPO_ROOT_DIR"
 # Note that hash file does not exist yet.
 [ ! -f composer.hash ] || exit 1
 composer show -a aaemnnosttv/composer-hash-plugin
-composer require aaemnnosttv/composer-hash-plugin:dev-$TRAVIS_COMMIT
+composer require aaemnnosttv/composer-hash-plugin:dev-master
 # Hash file should exist now.
 [ -f composer.hash ] || exit 2
 # Store the hash for comparison later.
