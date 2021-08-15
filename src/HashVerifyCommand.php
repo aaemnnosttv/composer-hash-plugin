@@ -3,6 +3,7 @@
 namespace ComposerHash;
 
 use Composer\Command\BaseCommand;
+use Exception;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -17,9 +18,11 @@ class HashVerifyCommand extends BaseCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         try {
-            Hash::verify(dirname($this->getComposer()->getConfig()->getConfigSource()->getName()));
+            Hash::verify(
+                dirname($this->getComposer()->getConfig()->getConfigSource()->getName())
+            );
             $output->writeln("<info>Hashes match.</info>");
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             $output->writeln('<warning>' . $exception->getMessage() . '</warning>');
             exit(1);
         }
