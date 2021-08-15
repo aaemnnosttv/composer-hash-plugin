@@ -11,8 +11,9 @@ As such, it is intended to be used in projects where the `composer.lock` file is
 
 Once installed, the plugin will write the current `content-hash` from your `composer.lock` file to a new `composer.hash` file after each `composer install` or `update`.
 This is the only thing it will do automatically.
-This new file is intended to be excluded from version control.
-The hashes can then be verified, but that has to be done (semi) manually. 
+
+**This new file is intended to be excluded from version control.**
+The hashes can then be verified, but that has to be done (semi) manually. See below.
 
 ## API
 
@@ -28,12 +29,14 @@ If hash verification fails, the command provides additional feedback and exits w
 
 ### PHP
 
-The plugin exposes a single `ComposerHash\verify($path)` function where `$path` is the absolute path to the project's root directory containing `composer.json`.
+The plugin exposes a `ComposerHash\Hash::verify($path)` method where `$path` is the absolute path to the project's root directory containing `composer.json`.
 This function checks that the `composer.hash` matches the corresponding hash in the `composer.lock` file (if it doesn't, a `HashMismatchException` is thrown.
-Other exceptions are thrown if called with an invalid path or if composer files are unreadable.
+Other exceptions are thrown if called with an invalid path or if Composer files are unreadable.
  
 ## Installation
 
+```sh
+$ composer require aaemnnosttv/composer-hash-plugin
 ```
-composer require aaemnnosttv/composer-hash-plugin
-```
+
+Note: the generated `composer.hash` file is intended to be ignored by source control so be sure to update your `.gitignore` or other VCS equivalent accordingly.
